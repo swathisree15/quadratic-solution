@@ -1,0 +1,53 @@
+import math
+
+def solve_quadratic(a, b, c):
+    if a == 0:
+        print("This is not a quadratic equation (a = 0).")
+        return
+    d = b**2 - 4*a*c
+    if d >= 0:
+        root1 = (-b + math.sqrt(d)) / (2*a)
+        root2 = (-b - math.sqrt(d)) / (2*a)
+        print(f"Roots: {root1:.2f}, {root2:.2f}")
+    else:
+        print("No real roots.")
+
+print("\n--- 1. Hardcoded Example ---")
+a, b, c = 1, -5, 6
+print(f"Equation: {a}x² + ({b})x + ({c}) = 0")
+solve_quadratic(a, b, c)
+
+print("\n--- 2. Keyboard Input ---")
+try:
+    a = float(input("Enter a: "))
+    b = float(input("Enter b: "))
+    c = float(input("Enter c: "))
+    print(f"Equation: {a}x² + ({b})x + ({c}) = 0")
+    solve_quadratic(a, b, c)
+except ValueError:
+    print("Invalid input. Please enter numbers.")
+
+print("\n--- 3. File Input (Single Set: input.txt) ---")
+try:
+    with open("input.txt", "r") as file:
+        lines = file.readlines()
+        a = float(lines[0])
+        b = float(lines[1])
+        c = float(lines[2])
+        print(f"Equation: {a}x² + ({b})x + ({c}) = 0")
+        solve_quadratic(a, b, c)
+except Exception as e:
+    print(f"Error reading input.txt: {e}")
+
+print("\n--- 4. File Input (Multiple Sets: input_multiple.txt) ---")
+try:
+    with open("input_multiple.txt", "r") as file:
+        for idx, line in enumerate(file, start=1):
+            try:
+                a, b, c = map(float, line.strip().split())
+                print(f"\nEquation {idx}: {a}x² + ({b})x + ({c}) = 0")
+                solve_quadratic(a, b, c)
+            except:
+                print(f"Invalid format on line {idx}")
+except Exception as e:
+    print(f"Error reading input_multiple.txt: {e}")
